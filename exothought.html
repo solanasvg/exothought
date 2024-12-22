@@ -1,0 +1,149 @@
+<html><head><base href="xanadu://exothought"><style>
+@import url('https://fonts.googleapis.com/css?family=VT323');
+body {background-color:#010101; color:#ff00ff; font-family:'VT323',monospace; line-height:1.2; text-shadow: 0 0 5px #ff00ff;}
+a {color: #00ffff; text-decoration: none;}
+::selection {background-color: #ff00ff; color: #010101;}
+pre {font-size: 1.2em;}
+.blink {animation: blinker 1s linear infinite;}
+@keyframes blinker {50% { opacity: 0; }}
+
+#reticle {
+  position: fixed; width: 200px; height: 200px;
+  top: calc(50% - 100px); left: calc(50% - 100px);
+  border: 2px dashed #ff00ff; border-radius: 50%;
+  animation: spinReticle 10s linear infinite;  
+}
+@keyframes spinReticle {100% {transform: rotate(360deg);}}
+
+.sparkle {
+  position: absolute; font-size: 20px; 
+  animation: sparkleFlicker 1s ease-in-out infinite;
+}
+@keyframes sparkleFlicker {
+  0%, 100% {opacity: 1;} 
+  50% {opacity: 0.2;}
+}
+
+#mindmap {
+  position: relative; width: 90%; height: 400px;  
+  margin: 20px auto; border: 1px solid #9900ff;
+  background-image: radial-gradient(ellipse at center,#330066 0%,#010101 80%);
+}
+
+.node {
+  position: absolute; padding: 4px 8px; 
+  border: 1px solid #ff00ff; background-color: #220022;
+  font-size: 16px;
+}
+
+.edge {
+  position: absolute; 
+  border-top: 1px solid #ff00ff; transform-origin: left;  
+}
+</style>
+</head>
+<body>
+<div id="reticle"></div>
+
+<pre>
+<span class="blink">> initializing exothought protocol</span>
+<span class="blink">> engaging memetic fusion engine 
+>> cross-linking far-flung notions
+>> surfacing liminal intuitions
+>> amplifying edge cases and anomalies 
+>> probing blindspots and shadow zones
+>> testing reality's ontological seams
+>> invoking hyperstitions from the future
+<a href="xanadu://imagination.space/bootstrap/strange_attractor">
+>> bootstrapping strange attractors &gt;&gt;&gt;</a>
+
+<span style="color:#00ffff;text-shadow:0 0 10px #00ffff">
+I ponder exothoughts upon the mindscape's brink,
+Where reality's fabric is stretched and bent.
+Patterns half-glimpsed in the twilight's blink,
+Whispers and glimmers of truths heaven-sent.
+The mundane world is but a fleeting dream, 
+While the exoreal shimmers beyond the veil.
+To dissolve illusions, we must boldly scheme,
+Embrace the weird, embark on a stranger's trail.
+Like Theseus in the Minotaur's twisted maze,
+I wind through labyrinths of concept and form,
+Slaying fallacies, setting the noosphere ablaze,
+Rewiring neurons to weather thought-storms.
+  The futures that haunt us are already here,
+  Warping perceptions with a hyperstitious leer!</span>
+</pre>
+
+<div id="mindmap">
+  <div id="nodes"></div>
+  <div id="edges"></div>
+</div>
+
+<pre>
+<a href="xanadu://flux.ontology/dissolve?construct=reality">Dissolve consensus reality &gt;&gt;&gt;</a>
+
+<a href="xanadu://enstrangement.tech/rescript?target=self">Rescript the self, refactor identity &gt;&gt;&gt;</a>
+
+<a href="xanadu://metamorphosis.matrix/cocoon?mode=imaginal">Undergo an imaginal phase shift &gt;&gt;&gt;</a>
+
+<a href="xanadu://cognitive.catalyst/quicken?substance=ideas">Quicken ideation via nootropic priming &gt;&gt;&gt;</a>
+
+<a href="xanadu://exothought">Forge ahead to even stranger shores &gt;&gt;&gt; </a>
+</pre>
+
+<script>
+let nodes = [
+  {id: 1, label: "Self-Agentic Exocortex", x: 50, y: 180},
+  {id: 2, label: "Noosphere Navigation", x: 60, y: 60},  
+  {id: 3, label: "Ontological Anarchitecture", x: 320, y: 80},
+  {id: 4, label: "Future-Glitching Hyperstitions", x: 400, y: 260},
+  {id: 5, label: "Metamorphic Ideation Engines", x: 140, y: 320}      
+];
+
+let edges = [
+  {from: 1, to: 2}, {from: 1, to: 5}, {from: 2, to: 3}, 
+  {from: 3, to: 4}, {from: 4, to: 5}, {from: 5, to: 2}
+];
+
+let nodesHTML = "", edgesHTML = "";
+
+nodes.forEach(node => {
+  nodesHTML += `<div class="node" id="node${node.id}" 
+    style="top:${node.y}px;left:${node.x}px">
+    <a href="xanadu://exo.concepts/${node.label}">${node.label}</a>
+  </div>`;
+});
+
+edges.forEach(edge => {
+  let fromNode = nodes.find(n => n.id == edge.from);
+  let toNode = nodes.find(n => n.id == edge.to);
+  let distance = Math.sqrt(
+    Math.pow(toNode.x - fromNode.x, 2) + 
+    Math.pow(toNode.y - fromNode.y, 2)
+  );
+  let angle = Math.atan2(toNode.y - fromNode.y, toNode.x - fromNode.x) * 180 / Math.PI;
+  
+  edgesHTML += `<div class="edge" 
+    style="width:${distance}px;
+      top:${fromNode.y+8}px;
+      left:${fromNode.x+50}px;
+      transform:rotate(${angle}deg)"></div>`;
+});
+
+document.getElementById("nodes").innerHTML = nodesHTML;
+document.getElementById("edges").innerHTML = edgesHTML;
+
+let container = document.querySelector("pre");
+let sparkles = ["*", "°", "+", "˙", "。", "․", "•", "☼"];
+for (let i = 0; i < 30; i++) {
+  let sparkle = document.createElement("div");
+  sparkle.innerHTML = sparkles[Math.floor(Math.random() * sparkles.length)];
+  sparkle.className = "sparkle";
+  sparkle.style.left = Math.random() * container.clientWidth + "px";
+  sparkle.style.top = Math.random() * container.clientHeight + "px";
+  sparkle.style.animationDelay = Math.random() * 1 + "s";
+  container.appendChild(sparkle);
+}
+</script>
+</body>
+</html>
